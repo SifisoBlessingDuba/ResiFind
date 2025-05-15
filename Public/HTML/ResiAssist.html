@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Residence Application</title>
+    <link rel="icon" type="image/png" href="../Images/minipic.png">
+    <link rel="stylesheet" href="../CSS/resiAssist.css">
+</head>
+
+
+<nav class="navigation">
+    <a href='/home'><img src="../Images/Icon.png" alt="logo" class="logo"></a>
+    <div class="centerLinks">
+        <a href='/home'><i class="fa-solid fa-house-user"></i>Home</a>
+        <a href='/resiapply'><i class="fa-solid fa-building-user"></i>ResiApply</a>
+        <a href='/applyassist'><i class="fa-solid fa-person-circle-question"></i>ResiAssist</a>
+        <a href='/tracking'><i class="fa-solid fa-bell"></i>Tracking</a>
+        <a href='/about'><i class="fa-solid fa-circle-info"></i>About</a>
+    </div>
+    <a href='/profile'><img src="../Images/profileIcon.png" alt="profile" class="profile"></a>
+</nav>
+
+<body>
+    <div class="form-container">
+        <div class="formHeader">
+            <h2>Application Process</h2>
+            <p>To apply for Private accomodation simply fill in the table below and get placed in a room fitting your criteria.
+                Read
+                rules and regulations <a
+                    href="https://www.cput.ac.za/storage/students/residence_rules_regulations_13092016.pdf"
+                    target="blank">here.</a></p>
+                    <div id="CompleteError" class="error"></div>
+        </div>
+        <hr>
+        <table class="userInfo">
+            <tr>
+                <td><label for="IDnumber">ID/Passport number:</label></td>
+                <td><textarea id="IDnumber" name="IDnumber" rows="1"></textarea><div id="IDnumberError" class="error"></div></td>
+                
+            </tr>
+            <tr>
+                <td><label for="Gender">Gender:</label></td>
+                <td><select id="Gender">
+                    <option value="Select Gender">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select><div id="genderError" class="error"></div></td>
+                    
+            </tr>
+            <tr>
+                <td><label for="Race">Race:</label></td>
+                <td><select id="Race">
+                    <option value="Select Race">Select Race</option>
+                        <option>Black</option>
+                        <option>White</option>
+                        <option>Other</option>
+                    </select><div id="raceError" class="error"></div></td>
+                    
+            </tr>
+            <tr>
+                <td><label for="disability">Disability?</label></td>
+                <td>Yes: <input type="radio" name="disability" value="yes"> No: <input type="radio" name="disability"
+                        value="no"><div id="disabilityError" class="error"></div></td>
+                        
+
+            </tr>
+            <tr>
+                <td><label for="medical_aid">Medical Aid?</label> <br></td>
+                <td>Yes: <input type="radio" name="medical_aid" value="yes"> No: <input type="radio" name="medical_aid"
+                        value="no"><div id="medicalError" class="error"> </div> <br></td>     
+                        
+            </tr>
+            
+            <tr>
+                <td><label for="KinName">Next of Kin's Name:</label></td>
+                <td><textarea id="KinName" name="KinName" rows="1"></textarea><div id="kinNameError" class="error"></div></td>
+                
+            </tr>
+            <tr>
+                <td><label for="KinSurname">Next of Kin's Surname:</label></td>
+                <td><textarea id="KinSurname" name="KinSurname" rows="1"></textarea><div id="kinSurnameError" class="error"></div></td>
+                
+            </tr>
+            <tr>
+                <td><label for="KinCell">Next of Kin's Cellphone:</label></td>
+                <td><textarea id="KinCell" name="KinCell" rows="1"></textarea><div id="kinCellError" class="error"></div></td>
+                
+            </tr>
+            <tr>
+                <td><label for="KinEmail">Next of Kin's Email:</label><br></td>
+                <td><textarea id="KinEmail" name="KinEmail" rows="1"></textarea><div id="kinEmailError" class="error"></div><br></td>
+                
+            </tr>
+
+            <tr>
+                <td><label for="Faculty">Faculty of your course:</label></td>
+                <td>
+                    <select id="Faculty" onchange="updateCourses()">
+                        <option value="Select Faculty">Select Faculty</option>
+                        <option value="Applied Science">Applied Science</option>
+                        <option value="Business and Management Science">Business and Management Science</option>
+                        <option value="Education">Education</option>
+                        <option value="Engineering & the Built Environment">Engineering & the Built Environment</option>
+                        <option value="Health and Wellness Science">Health and Wellness Science</option>
+                        <option value="Informatics and Design">Informatics and Design</option>
+                    </select>
+                    <div id="facultyError" class="error"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Course">Course of study:</label></td>
+                <td>
+                    <select id="Course">
+                        <option value="Select a Course">Select a Course</option>
+                    </select>
+                    <div id="courseError" class="error"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="Year">Year of study:</label></td>
+                <td><select id="Year">
+                    <option value="Select Year">Select Year</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>Advanced</option>
+                        <option>Masters</option>
+                    </select><div id="yearError" class="error"></div></td>
+                    
+            </tr>
+            <tr>
+                <td><label for="type">Study Type:</label></td>
+                <td><select id="type">
+                    <option value="Select Type">Select Type</option>
+                        <option>Full Time</option>
+                        <option>Part Time</option>
+                    </select><div id="typeError" class="error"></div></td>
+                    
+            </tr>
+            <tr>
+                <td><label for="Payment">Form of Payment:</label></td>
+                <td><select id="Payment">
+                        <option value="Select Payment">Select Payment</option>
+                        <option>Self-Funded</option>
+                        <option>NSFAS</option>
+                        <option>Bursary</option>
+                        <option>Other</option>
+                    </select><div id="paymentError" class="error"></div></td>
+                    
+            </tr>
+
+            <tr>
+                <td><label for="SchoolName">HighSchool Name:</label></td>
+                <td><textarea id="SchoolName" name="SchoolName" rows="1"></textarea><div id="SchoolNameError" class="error"></div></td>
+                
+            </tr>
+
+            <tr>
+                <td><label for="SchoolAddress">HighSchool Address:</label></td>
+                <td><textarea id="SchoolAddress" name="SchoolAddress" rows="1"></textarea><div id="SchoolAddressError" class="error"></div></td>
+                
+            </tr>
+
+            <tr>
+                <td><label for="Results">Upload Grade 12 Final results:</label></td>
+                <td>
+                    <input type="file" id="Results" name="Results" accept=".pdf,.doc,.docx,.txt,.jpeg">
+                    <div id="ResultsError" class="error"></div>
+                </td>
+            </tr>
+            
+
+        </table>
+        <br>
+        <div class="sectionButtons">
+            <input type="button" Value="Clear" onclick="PushClear()">
+            <input type="button" Value="Enter" onclick="PushEnter()">
+        </div>
+
+
+    </div>
+
+</body>
+<hr>
+<footer>
+    <div class="footers">
+        <div class="subscribe">
+            <h2>ResiFind</h2><br>
+            <div class="subText">
+                <p>Join your newsletter to stay up to date for updates</p><br>
+            </div>
+            <div class="subscribeSection">
+                <input type="text" id="Email" name="Email" placeholder="Enter your email adress here" required>
+                <input type="button" Value="Subscribe" onclick="PushSubscription()">
+                <p id="SubscribeMessage" style="color: red;"><br>
+            </div>
+            <div class="contact">
+                <h3>Contact us</h3><br>
+                <div class="contactInfo">
+                    <p>Tel <i class="fa-solid fa-phone"></i> :+27712345678 <br />Email<i
+                            class="fa-regular fa-envelope"></i>
+                        :Info@ResiFind.ac.za</p>
+                    <p><i class="fa-solid fa-map-location-dot"></i>:Roaland Street, Cape Town, South Africa, 8001</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footerNav">
+            <h2>Sites</h2><br>
+            <a href='/home'>Home</a><br><br>
+            <a href='/resiapply'>ResiApply</a><br><br>
+            <a href='/applyassist'>ResiAssist</a><br><br>
+            <a href='/tracking'>Tracking</a><br><br>
+            <a href='/about'>About</a><br><br>
+        </div>
+        <div class="">
+
+        </div>
+        <div class="followUs">
+            <h2>Follow us</h2><br>
+            <a href="https://www.facebook.com/" target="blank">
+                <p><i class="fa-brands fa-square-facebook"></i> Facebook</p><br>
+            </a>
+            <a href="https://www.tiktok.com/en/" target="blank">
+                <p><i class="fa-brands fa-tiktok"></i> TickTock</p><br>
+            </a>
+            <a href="https://www.instagram.com/" target="blank">
+                <p><i class="fa-brands fa-square-instagram"></i> Instagram</p><br>
+            </a>
+            <a href="https://za.pinterest.com/" target="blank">
+                <p><i class="fa-brands fa-square-pinterest"></i> Pinterest</p><br>
+            </a>
+            <a href="https://twitter.com/" target="blank">
+                <p><i class="fa-brands fa-square-x-twitter"></i> X</p><br>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div class="finalFooter">
+        <div class="copyright">
+            <p>&copy; Copyright 2024 ResiFind (Pty) Ltd. All Rights Reserved.</p>
+        </div>
+        <div class="policy">
+            <a href="https://www.cput.ac.za/services/hc/policies">Privacy Policy</a>
+            <a href="https://www.cput.ac.za/study/fees">Terms of Service</a>
+        </div>
+    </div>
+
+</footer>
+<script src="../JavaScript/ResiAssist.js"></script>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Residence Application</title>
+    <link rel="icon" type="image/png" href="../Images/minipic.png">
+    <link rel="stylesheet" href="../CSS/Message.css">
+</head>
+
+
+<nav class="navigation">
+    <a href='/home'><img src="../Images/Icon.png" alt="logo" class="logo"></a>
+    <div class="centerLinks">
+        <a href='/home'><i class="fa-solid fa-house-user"></i>Home</a>
+        <a href='/resiapply'><i class="fa-solid fa-building-user"></i>ResiApply</a>
+        <a href='/applyassist'><i class="fa-solid fa-person-circle-question"></i>ResiAssist</a>
+        <a href='/tracking'><i class="fa-solid fa-bell"></i>Tracking</a>
+        <a href='/about'><i class="fa-solid fa-circle-info"></i>About</a>
+    </div>
+    <a href='/profile'><img src="../Images/profileIcon.png" alt="profile" class="profile"></a>
+</nav>
+
+
+<body>
+
+    <form action="" name="formfill" onsubmit="return validate()">
+        <fieldset>
+            <legend>
+
+
+                <div class="image-upload-container">
+
+                    <label>
+                        <legend><img id="user-icon" src="../Images/prf.png" alt="User Icon" />
+                            <input type="file" id="file-input" onchange="changeImage()" />
+                    </label>
+            </legend>
+
+            <div id="userEmail"></div>
+            </div>
+            </legend>
+
+            <fieldset class="username">
+                <a href='/profile/updatedetails' class="menu-item">Update details</a><br>
+                <a href='/profile/messages' class="menu-item">Messages</a><br>
+                <a href='/profile/settings' class="menu-item">Settings</a><br>
+                <a href='/verify' class="menu-item" onclick="return confirmLogout()">Log out</a>
+            </fieldset>
+
+            <fieldset class="update-details">
+                <legend>Update Details</legend>
+                </br>
+                <label for="cell">Cell phone no. :</label>
+                <input type="text" id="cell" name="cell" required></br></br>
+                <button type="submit" id="Save" onclick="updateStudentDetails()">Save</button>
+    </form>
+    </fieldset>
+    </fieldset>
+
+    <script>
+        let globalEmail;
+        window.onload = function() {
+    fetch('/api/student-email')
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('#userEmail').innerHTML = `${data.email}`;
+            globalEmail = data.email;
+        })
+        .catch(error => console.error('Error fetching email:', error));
+};
+        function updateStudentDetails() {
+            const cell = document.getElementById('cell').value;
+            const email = globalEmail;
+
+            if (cell === "" || email === "") {
+                console.log("Please fill in all fields.");
+                return;
+            }
+
+            fetch('/updateStudentDetails', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ cell, email }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Details updated successfully.");
+                    console.log("Server Response:", data);
+                    alert("Details updated successfully!");
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+
+        function validate() {
+            const formData = new FormData(document.forms['formfill']);
+
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log("Details updated successfully.");
+                    console.log("Server Response:", data);
+                    alert("Details uploaded successfully!");
+                    document.formfill.reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+            return false;
+            var loadFile = function (event) {
+                var image = document.getElementById('file-output');
+                image.src = URL.createObjectURL(event.target.files[0]);
+            };
+
+        }
+        function changeImage() {
+            var fileInput = document.getElementById('file-input');
+            var userIcon = document.getElementById('user-icon');
+
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+
+
+                console.log("File selected:");
+                console.log("Name:", fileInput.files[0].name);
+                console.log("Size:", fileInput.files[0].size, "bytes");
+                console.log("Type:", fileInput.files[0].type);
+
+                reader.onload = function (e) {
+                    userIcon.src = e.target.result;
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+
+        function confirmLogout() {
+            var result = confirm("Are you sure you want to log out?");
+
+            if (result) {
+                window.location.href = '/profile';
+                return true;
+            }
+            return false;
+        }
+
+
+    </script>
+</body>
+<hr>
+<footer>
+    <div class="footers">
+        <div class="subscribe">
+            <h2>ResiFind</h2><br>
+            <div class="subText">
+                <p>Join your newsletter to stay up to date for updates</p><br>
+            </div>
+            <div class="subscribeSection">
+                <input type="text" id="Email" name="Email" placeholder="Enter your email adress here" required>
+                <input type="button" Value="Subscribe" onclick="PushSubscription()">
+                <p id="SubscribeMessage" style="color: red;"><br>
+            </div>
+            <div class="contact">
+                <h3>Contact us</h3><br>
+                <div class="contactInfo">
+                    <p>Tel <i class="fa-solid fa-phone"></i> :+27712345678 <br />Email<i
+                            class="fa-regular fa-envelope"></i>
+                        :Info@ResiFind.ac.za</p>
+                    <p><i class="fa-solid fa-map-location-dot"></i>:Roaland Street, Cape Town, South Africa, 8001</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footerNav">
+            <h2>Sites</h2><br>
+            <a href='/home'>Home</a><br><br>
+            <a href='/resiapply'>ResiApply</a><br><br>
+            <a href='/applyassist'>ResiAssist</a><br><br>
+            <a href='/tracking'>Tracking</a><br><br>
+            <a href='/about'>About</a><br><br>
+        </div>
+        <div class="">
+
+        </div>
+        <div class="followUs">
+            <h2>Follow us</h2><br>
+            <a href="https://www.facebook.com/" target="blank">
+                <p><i class="fa-brands fa-square-facebook"></i> Facebook</p><br>
+            </a>
+            <a href="https://www.tiktok.com/en/" target="blank">
+                <p><i class="fa-brands fa-tiktok"></i> TickTock</p><br>
+            </a>
+            <a href="https://www.instagram.com/" target="blank">
+                <p><i class="fa-brands fa-square-instagram"></i> Instagram</p><br>
+            </a>
+            <a href="https://za.pinterest.com/" target="blank">
+                <p><i class="fa-brands fa-square-pinterest"></i> Pinterest</p><br>
+            </a>
+            <a href="https://twitter.com/" target="blank">
+                <p><i class="fa-brands fa-square-x-twitter"></i> X</p><br>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div class="finalFooter">
+        <div class="copyright">
+            <p>&copy; Copyright 2024 ResiFind (Pty) Ltd. All Rights Reserved.</p>
+        </div>
+        <div class="policy">
+            <a href="https://www.cput.ac.za/services/hc/policies">Privacy Policy</a>
+            <a href="https://www.cput.ac.za/study/fees">Terms of Service</a>
+        </div>
+    </div>
+
+</footer>
+<script>
+function PushSubscription() {
+    let email = document.getElementById('Email').value;
+  
+    if (email == "") {
+        SubscribeMessage.textContent = 'Please enter your email address';
+        return;
+        }
+
+        if (!email.endsWith("@mycput.ac.za")) {
+            SubscribeMessage.textContent = 'Please enter a valid student email address';
+        return;
+        }
+        
+        SubscribeMessage.textContent = 'Thank you for your subscription!';
+    
+    fetch('/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+  }
+</script>
+
+</html>

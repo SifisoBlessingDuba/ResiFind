@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+            integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>Residence Application</title>
+        <link rel="icon" type="image/png" href="../Images/minipic.png">
+        <link rel="stylesheet" href="../CSS/Wireframe.css">
+        <link rel="stylesheet" href="../CSS/ProjectStyle.css">
+    </head>
+    
+    
+    <nav class="navigation">
+        <a href='/home'><img src="../Images/Icon.png" alt="logo" class="logo"></a>
+        <div class="centerLinks">
+            <a href='/home'><i class="fa-solid fa-house-user"></i>Home</a>
+            <a href='/resiapply'><i class="fa-solid fa-building-user"></i>ResiApply</a>
+            <a href='/applyassist'><i class="fa-solid fa-person-circle-question"></i>ResiAssist</a>
+            <a href='/tracking'><i class="fa-solid fa-bell"></i>Tracking</a>
+            <a href='/about'><i class="fa-solid fa-circle-info"></i>About</a>
+        </div>
+        <a href='/profile'><img src="../Images/profileIcon.png" alt="profile" class="profile"></a>
+    </nav>
+    
+    <body>
+        <div id="adminReport">
+        <h1> Application Status </h1>
+        <div class="myProgress-container" id="myProgress-container">
+
+            <div class="status-item">
+                <div class="circle-progress" id="submitted-circle">
+                  <span class="percentage" id="submitted-percentage">0%</span>
+                </div>
+                <label for="submitted">Application Submitted</label>
+              </div>
+              
+              <div class="status-item">
+                <div class="circle-progress" id="received-circle">
+                  <span class="percentage" id="received-percentage">0%</span>
+                </div>
+                <label for="received">Application Received</label>
+              </div>
+              
+              <div class="status-item">
+                <div class="circle-progress" id="processing-circle">
+                  <span class="percentage" id="processing-percentage">0%</span>
+                </div>
+                <label for="processing">Application Processing</label>
+              </div>
+              
+              <div class="status-item">
+                <div class="circle-progress" id="evaluation-circle">
+                  <span class="percentage" id="evaluation-percentage">0%</span>
+                </div>
+                <label for="evaluation">Evaluation Process</label>
+              </div>
+              
+              <div class="status-item">
+                <div class="circle-progress" id="placing-circle">
+                  <span class="percentage" id="placing-percentage">0%</span>
+                </div>
+                <label for="placing">Placing Process</label>
+              </div>
+              
+              <div class="status-item">
+                <div class="circle-progress" id="final-status-circle">
+                  <span class="percentage" id="final-status-percentage">Pending</span>
+                </div>
+                <label for="final-status">Accepted/Rejected</label>
+              </div>
+        </div>
+        
+        <br>
+        <p id="ResultMessage" style="margin-left: 20px;">
+        </p> 
+        <br>
+          
+            
+        </div>   
+                    
+    </body>
+    <hr>
+    <footer>
+        <div class="footers">
+            <div class="subscribe">
+                <h2>ResiFind</h2><br>
+                <div class="subText">
+                    <p>Join your newsletter to stay up to date for updates</p><br>
+                </div>
+                <div class="subscribeSection">
+                    <input type="text" id="Email" name="Email" placeholder="Enter your email adress here" required>
+                    <input type="button" Value="Subscribe" onclick="PushSubscription()">
+                    <p id="SubscribeMessage" style="color: red;"><br>
+                </div>
+                <div class="contact">
+                    <h3>Contact us</h3><br>
+                    <div class="contactInfo">
+                        <p>Tel <i class="fa-solid fa-phone"></i> :+27712345678 <br />Email<i
+                                class="fa-regular fa-envelope"></i>
+                            :Info@ResiFind.ac.za</p>
+                        <p><i class="fa-solid fa-map-location-dot"></i>:Roaland Street, Cape Town, South Africa, 8001</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="footerNav">
+                <h2>Sites</h2><br>
+                <a href='/home'>Home</a><br><br>
+                <a href='/resiapply'>ResiApply</a><br><br>
+                <a href='/applyassist'>ResiAssist</a><br><br>
+                <a href='/tracking'>Tracking</a><br><br>
+                <a href='/about'>About</a><br><br>
+            </div>
+            <div class="">
+    
+            </div>
+            <div class="followUs">
+                <h2>Follow us</h2><br>
+                <a href="https://www.facebook.com/" target="blank">
+                    <p><i class="fa-brands fa-square-facebook"></i> Facebook</p><br>
+                </a>
+                <a href="https://www.tiktok.com/en/" target="blank">
+                    <p><i class="fa-brands fa-tiktok"></i> TickTock</p><br>
+                </a>
+                <a href="https://www.instagram.com/" target="blank">
+                    <p><i class="fa-brands fa-square-instagram"></i> Instagram</p><br>
+                </a>
+                <a href="https://za.pinterest.com/" target="blank">
+                    <p><i class="fa-brands fa-square-pinterest"></i> Pinterest</p><br>
+                </a>
+                <a href="https://twitter.com/" target="blank">
+                    <p><i class="fa-brands fa-square-x-twitter"></i> X</p><br>
+                </a>
+            </div>
+         </div>
+         <hr>
+         <div class="finalFooter">
+            <div class="copyright">
+                <p>&copy; Copyright 2024 ResiFind (Pty) Ltd. All Rights Reserved.</p>
+            </div>
+            <div class="policy">
+                <a href="https://www.cput.ac.za/services/hc/policies">Privacy Policy</a>
+                <a href="https://www.cput.ac.za/study/fees">Terms of Service</a>
+            </div>
+        </div>
+    
+    </footer>
+    <script>
+let globalEmail;
+
+window.onload = function() {
+    fetch('/api/student-email')
+        .then(response => response.json())
+        .then(data => {
+            globalEmail = data.email; 
+
+            let stdEmail = globalEmail;
+            console.log(stdEmail); 
+
+            return fetch(`/student-progress/${stdEmail}`);
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch student progress');
+            }
+            return response.json(); 
+        })
+        .then(data => {
+            document.getElementById('submitted-percentage').textContent = `${data.submitted}%`;
+            document.getElementById('received-percentage').textContent = `${data.received}%`;
+            document.getElementById('processing-percentage').textContent = `${data.processing}%`;
+            document.getElementById('evaluation-percentage').textContent = `${data.evaluation}%`;
+            document.getElementById('placing-percentage').textContent = `${data.placing}%`;
+            document.getElementById('final-status-percentage').textContent = `${data.finalStatus}`;
+
+            let ResultMessage = document.getElementById('ResultMessage');
+            if (data.finalStatus === "Accepted") {
+                ResultMessage.innerHTML = `<strong><u>*ACCEPTED*</u></strong><br>${data.email}<br>has been placed at <strong>${data.Res}</strong> residence`;
+            } else if (data.finalStatus === "Rejected") {
+                ResultMessage.innerHTML = `Application was unsuccessful / Rejected<br><br><strong><u>Reason</u></strong><br>you don't currently qualify for a Residence<br> please try again at a later stage`;
+            } else {
+                ResultMessage.innerHTML = "Application is still being processed <br> Please be patient";
+            }
+        })
+        .catch(error => console.error('Error fetching student progress:', error));
+};
+
+function PushSubscription() {
+    let email = document.getElementById('Email').value;
+  
+    if (email == "") {
+        SubscribeMessage.textContent = 'Please enter your email address';
+        return;
+        }
+
+        if (!email.endsWith("@mycput.ac.za")) {
+            SubscribeMessage.textContent = 'Please enter a valid student email address';
+        return;
+        }
+
+        SubscribeMessage.textContent = 'Thank you for your subscription!';
+    
+    fetch('/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+  }
+
+  function getStudentProgress() {
+  const stdEmail = document.getElementById('studentNumber').value;
+
+  if (!stdEmail) {
+    alert('Please enter a student number');
+    return;
+  }
+
+  fetch(`/student-progress/${stdEmail}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch student progress');
+      }
+      return response.json();
+    })
+    .then(data => {
+      document.getElementById('submitted-percentage').textContent = `${data.submitted}%`;
+      document.getElementById('received-percentage').textContent = `${data.received}%`;
+      document.getElementById('processing-percentage').textContent = `${data.processing}%`;
+      document.getElementById('evaluation-percentage').textContent = `${data.evaluation}%`;
+      document.getElementById('placing-percentage').textContent = `${data.placing}%`;
+      document.getElementById('final-status-percentage').textContent = `${data.finalStatus}`;
+      
+      if(data.finalStatus == "Accepted"){
+        ResultMessage.innerHTML = `<strong><u>*ACCEPTED*</u></strong><br>${data.email}<br>has been placed at <strong>${data.Res}</strong> residence`;
+    }else if (data.finalStatus == "Rejected"){
+      ResultMessage.textContent = "Application was unsucessful / Rejected";
+    }else {
+      ResultMessage.textContent = "Application is Still being processed <br> Please be pecient";
+    }
+    })
+    .catch(error => console.error('Error fetching student progress:', error));
+}
+
+    </script> 
+
+</html>
+        

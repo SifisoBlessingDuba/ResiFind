@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login and Register</title>
+
+  <link rel="stylesheet" href="../CSS/login.css">  
+
+  <script src="https://kit.fontawesome.com/b6033b1261.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" href="../Images/minipic.png">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="form-box" id="registerFormContainer">
+      <img src="../Images/minipic.png" alt="Logo" class="logo"> 
+      <h1 id="title">Register</h1>
+
+      <form id="registerForm">
+
+
+
+        <div class="input-field"></div>
+
+        <div class="input-group">
+
+          <div class="input-field" id="nameField">
+
+            <i class="fa-regular fa-user"></i>
+
+            <input type="text" id="nameInput" name="name" placeholder="Student Name" required>
+
+          </div>
+
+          <div class="input-field">
+
+            <i class="fa-regular fa-envelope"></i>
+
+            <input type="email" id="emailInput" name="email" placeholder="Student Email" required>
+            
+          </div>
+          <p id="validEmail" style="color: red;"></p>
+
+
+
+          <div class="input-field"></div>
+
+          <div class="input-field" id="nameField">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <input type="text" id="TelphoneInput" name="number" placeholder="Student Telphone" required>
+
+          </div>
+
+
+
+          <div class="input-field">
+
+            <i class="fa-solid fa-lock"></i>
+
+            <input type="password" id="PasswordInput" name="password" placeholder="Student password" required>
+
+          </div>
+
+        </div>
+
+        <p id="registerMessage" style="color: red;"></p>
+
+        <div class="btn">
+
+          <button type="submit" id="RegisterBtn">Register</button>
+
+        </div>
+        <br>
+
+    <p>Already registered? <a href="/login" >Login here</a></p>
+
+        
+        <br><p>Log in as admin <a href="/AdminVerify"> here</a></p>
+
+      </form>
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <script>
+
+    const registerForm = document.getElementById('registerForm');
+    const loginForm = document.getElementById('loginForm');
+    const registerMessage = document.getElementById('registerMessage');
+    const loginMessage = document.getElementById('loginMessage');
+    const registeredUsers = [];
+    registerForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById('nameInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      const telphone = document.getElementById('TelphoneInput').value.trim();
+      const password = document.getElementById('PasswordInput').value.trim();
+
+      let isValid = true;
+      registerMessage.textContent = '';
+
+      if (name === '' || email === '' || telphone === '' || password === '') {
+        isValid = false;
+        registerMessage.textContent = 'Please fill in all fields.';
+      }
+
+      if (isValid && !email.endsWith('@mycput.ac.za')) {
+        isValid = false;
+        validEmail.textContent = 'Email must end with @mycput.ac.za.';
+      }
+
+      if (isValid && password.length < 6) {
+        isValid = false;
+        registerMessage.textContent = 'Password must be at least 6 characters long.';
+      }
+
+      if (isValid) {
+        const StudentDetail = {
+          email: email,
+          name: name,
+          telphone: telphone,
+          password: password
+        };
+
+        fetch('/Registration', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(StudentDetail)
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error(response.statusText);
+            }
+          })
+          .then(data => {
+            registerMessage.textContent = 'registered successfully, now you can log in ';
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            registerMessage.textContent ='An error occurred while Registering, Account already exists';
+          });
+      }
+    });
+
+    document.getElementById('toggleRegisterBtn').addEventListener('click', () => {
+      document.getElementById('loginFormContainer').style.display = 'none';
+      document.getElementById('registerFormContainer').style.display = 'block';
+    });
+
+  </script>
+
+</body>
+
+</html>

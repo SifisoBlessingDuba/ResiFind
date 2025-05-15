@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Residence Application</title>
+    <link rel="icon" type="image/png" href="minipic.png">
+    <link rel="stylesheet" href="Wireframe.css">
+    <link rel="stylesheet" href="ProjectStyle.css">
+</head>
+
+
+<nav class="navigation">
+    <a href="#home"><img src="Icon.png" alt="logo" class="logo"></a>
+    <div class="centerLinks">
+        <a href="#home"><i class="fa-solid fa-house-user"></i>Home</a>
+        <a href="#resiapply"><i class="fa-solid fa-building-user"></i>ResiApply</a>
+        <a href="#resiassist"><i class="fa-solid fa-person-circle-question"></i>ResiAssist</a>
+        <a href="#tracking"><i class="fa-solid fa-bell"></i>Tracking</a>
+        <a href="#about"><i class="fa-solid fa-circle-info"></i>About</a>
+    </div>
+    <a href="#profile"><img src="profileIcon.png" alt="profile" class="profile"></a>
+</nav>
+
+<body>
+
+<div class="admin_container">
+    <h1> Administrator Dashboard</h1>
+
+
+
+
+    <form id="status-form">
+        <label for="application-id">Application ID: </label>
+        <input type="text" id="application-id" name="application-id" required>
+        <label for=" status"> Update Status:</label>
+        <select id="status" name="staus" required>
+            <option value="submitted">Application Submitted</option>
+            <option value="recieved">Application Recieved</option>
+            <option value="processing">Application Processing</option>
+            <option value="placing">Placing Progress</option>
+            <option value="rejected">Rejected</option>
+            <option value="accepted">Accepted</option>
+            
+        </select>
+        <label for="report"> Report:</label>
+        <textarea id="report" name="report" rows="4" required></textarea>
+        <button type="submit">Update Status</button>
+    </form>
+    
+
+</div>
+
+    <script src="adminJavascript.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',() =>{
+    const token= localStorage.getItem('token');
+    if(!token){
+        alert("Please login first");
+        window.location.href='adminLogin.html'
+    }
+});
+    </script>
+
+
+</body>
+
+
+  <footer>
+      <div class="footers">
+        <div class="subscribe">
+            <h2>ResiFind</h2><br>
+            <div class="subText">
+                <p>Join your newsletter to stay up to date for updates</p><br>
+            </div>
+            <div class="subscribeSection">
+                <input type="text" id="Email" name="Email" placeholder="Enter your email adress here" required>
+                <input type="button" Value="Subscribe" onclick="PushSubscription()"><br><br>
+            </div>
+            <div class="contact">
+                <h3>Contact us</h3><br>
+                <div class="contactInfo">
+                    <p>Tel <i class="fa-solid fa-phone"></i> :+27712345678 <br />Email<i
+                            class="fa-regular fa-envelope"></i>
+                        :Info@ResiFind.ac.za</p>
+                    <p><i class="fa-solid fa-map-location-dot"></i>:Roaland Street, Cape Town, South Africa, 8001</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footerNav">
+            <h2>Sites</h2><br>
+            <a href="#home">Home</a><br><br>
+            <a href="#home">ResiApply</a><br><br>
+            <a href="#home">ResiAssist</a><br><br>
+            <a href="#home">Tracking</a><br><br>
+            <a href="#home">About</a><br><br>
+        </div>
+        <div class="">
+
+        </div>
+        <div class="followUs">
+            <h2>Follow us</h2><br>
+            <a href="https://www.facebook.com/" target="blank">
+                <p><i class="fa-brands fa-square-facebook"></i> Facebook</p><br>
+            </a>
+            <a href="https://www.tiktok.com/en/" target="blank">
+                <p><i class="fa-brands fa-tiktok"></i> TickTock</p><br>
+            </a>
+            <a href="https://www.instagram.com/" target="blank">
+                <p><i class="fa-brands fa-square-instagram"></i> Instagram</p><br>
+            </a>
+            <a href="https://za.pinterest.com/" target="blank">
+                <p><i class="fa-brands fa-square-pinterest"></i> Pinterest</p><br>
+            </a>
+            <a href="https://twitter.com/" target="blank">
+                <p><i class="fa-brands fa-square-x-twitter"></i> X</p><br>
+            </a>
+        </div>
+     </div>
+     <hr>
+     <div class="finalFooter">
+        <div class="copyright">
+            <p>&copy; Copyright 2024 ResiFind (Pty) Ltd. All Rights Reserved.</p>
+        </div>
+        <div class="policy">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+
+  </footer>
+
+</html>

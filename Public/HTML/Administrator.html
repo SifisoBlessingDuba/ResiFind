@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/adminStatus.css">
+    <title>Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="../Images/minipic.png">
+</head>
+
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <h2>Retrieve Student Information</h2>
+    <label for="studentDropdown">Select Student:</label>
+    <select id="studentDropdown"></select>
+    <button onclick="getStudentInfo()">View Student Info</button>
+    <div id="studentInfo"></div>
+
+    <h2>Update Student Progress</h2>
+    <label for="applicationReceived">Application Received:</label>
+    <input type="number" id="applicationReceived" min="0" max="100"><br>
+    <label for="evaluationProgress">Evaluation Progress:</label>
+    <input type="number" id="evaluationProgress" min="0" max="100"><br>
+    <label for="placingProcess">Placing Process:</label>
+    <input type="number" id="placingProcess" min="0" max="100"><br>
+    <label for="acceptedRejected">Accepted/Rejected:</label>
+    <select id="acceptedRejected">
+        <option value="Pending">Pending</option>
+        <option value="Accepted">Accepted</option>
+        <option value="Rejected">Rejected</option>
+    </select><br>
+    <button onclick="updateProgress()">Update Progress</button>
+
+    <h2>Add Residence</h2>
+    <label for="resName">Residence Name:</label>
+    <input type="text" id="resName" placeholder="Residence Name" required><br>
+    <label for="resLocation">Location:</label>
+    <input type="text" id="resLocation" placeholder="Location" required><br>
+    <label for="resCost">Cost:</label>
+    <input type="number" id="resCost" placeholder="Cost" required><br>
+    <label for="resCapacity">Capacity:</label>
+    <input type="number" id="resCapacity" placeholder="Capacity" required><br>
+    <label for="sharing">Sharing:</label>
+    <select id="sharing">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select><br>
+    <label for="facultyForResidence">Faculty:</label>
+    <select id="facultyForResidence">
+        <option value="Select Faculty">Select Faculty</option>
+        <option value="Applied Science">Applied Science</option>
+        <option value="Business and Management Science">Business and Management Science</option>
+        <option value="Education">Education</option>
+        <option value="Engineering & the Built Environment">Engineering & the Built Environment</option>
+        <option value="Health and Wellness Science">Health and Wellness Science</option>
+        <option value="Informatics and Design">Informatics and Design</option>
+    </select><br>
+    <label for="ResidenceType">Type:</label>
+    <select id="ResidenceType">
+        <option value="Private accomodation">Private</option>
+        <option value="Residence">Residence</option>
+    </select><br>
+
+    <button onclick="addResidence()">Add Residence</button>
+    <h2>Assign Residence to Student</h2>
+<label for="facultyAssign">Select Faculty:</label>
+<select id="facultyAssign">
+    <option value="Select Faculty">Select Faculty</option>
+    <option value="Applied Science">Applied Science</option>
+    <option value="Business and Management Science">Business and Management Science</option>
+    <option value="Education">Education</option>
+    <option value="Engineering & the Built Environment">Engineering & the Built Environment</option>
+    <option value="Health and Wellness Science">Health and Wellness Science</option>
+    <option value="Informatics and Design">Informatics and Design</option>
+</select>
+<button onclick="getResidencesByFaculty()">Show Residences</button>
+<br>
+<label for="residenceIdAssign">Select Residence:</label>
+<select id="residenceIdAssign">
+  <option></option>
+</select><br>
+<label for="Gender">Gender:</label>
+<select id="SelectedGender">
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+</select>
+
+<button onclick="assignResidenceToStudent()">Assign Residence</button>
+
+    <script>
+        let globalEmail2;
+        function populateStudentDropdown() {
+            fetch('/admin/students')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch student data');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const dropdown = document.getElementById('studentDropdown');
+                    dropdown.innerHTML = ''; 
+                    data.forEach(student => {
+                        const option = document.createElement('option');
+                        option.value = student.StdEmail;
+                        option.textContent = `ID: ${student.ApplicationID} - ${student.StdEmail}- ${student.ApplicationType}`;
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching student data:', error));
+        }
+
+        function getStudentInfo() {
+            const stdEmail = document.getElementById('studentDropdown').value;
+            if (!stdEmail) {
+                alert('Please select a student');
+                SelectStudentsError.textContent = 'Please select a student';
+
+                return;
+            }
+            fetch(`/admin/student/${stdEmail}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch student info');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const studentInfo = document.getElementById('studentInfo');
+                    studentInfo.innerHTML = `
+        <h2>Student Information</h2>
+        <table>
+          <tr>
+            <th>Application ID:</th>
+            <td>${data.ApplicationID}</td>
+          </tr>
+        <tr>
+            <th>Student Email:</th>
+            <td>${data.StdEmail}</td>
+          </tr>
+          <tr>
+        <tr>
+            <th>ApplicationType:</th>
+            <td>${data.ApplicationType}</td>
+          </tr>
+            <th>Faculty:</th>
+            <td>${data.Faculty}</td>
+          </tr>
+          <tr>
+            <th>Course:</th>
+            <td>${data.Course}</td>
+          </tr>
+          <tr>
+            <th>Year:</th>
+            <td>${data.Year}</td>
+          </tr>
+          <tr>
+            <th>Study Type:</th>
+            <td>${data.StdType}</td>
+          </tr>
+          <tr>
+            <th>Gender:</th>
+            <td>${data.Gender}</td>
+          </tr>
+          <tr>
+            <th>Race:</th>
+            <td>${data.Race}</td>
+          </tr>
+          <tr>
+            <th>Payment:</th>
+            <td>${data.Payment}</td>
+          </tr>
+          <tr>
+            <th>School Name:</th>
+            <td>${data.SchoolName}</td>
+          </tr>
+          <tr>
+            <th>School Address:</th>
+            <td>${data.SchoolAddress}</td>
+          </tr>
+          <tr>
+            <th>Status:</th>
+            <td>Pending</td>
+          </tr>
+        </table>
+        <h2>Progress:</h2>
+        <table>
+          <tr>
+            <th>Application Sent:</th>
+            <td>${data.ApplicationSent}%</td>
+          </tr>
+          <tr>
+            <th>Application Received:</th>
+            <td>${data.ApplicationReceived}%</td>
+          </tr>
+          <tr>
+            <th>Evaluation Progress:</th>
+            <td>${data.EvaluationProgress}%</td>
+          </tr>
+          <tr>
+            <th>Placing Process:</th>
+            <td>${data.PlacingProcess}%</td>
+          </tr>
+        </table>
+      `;
+      globalEmail2 = data.StdEmail;
+                })
+                .catch(error => console.error('Error fetching student info:', error));
+        }
+
+        function getResidencesByFaculty() {
+    const faculty = document.getElementById('facultyAssign').value;
+
+    if (!faculty) {
+        alert('Please select a faculty');
+        return;
+    }
+
+    fetch(`/admin/residences/${faculty}`)
+        .then(response => response.json())
+        .then(data => {
+            const residenceDropdown = document.getElementById('residenceIdAssign');
+            residenceDropdown.innerHTML = '';
+            data.forEach(residence => {
+                const option = document.createElement('option');
+              //  option.value = residence.ResidenceID;
+                option.textContent = `${residence.ResName}`;
+                residenceDropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching residences:', error));
+}
+
+function assignResidenceToStudent() {
+  const selectedResidence = document.getElementById("residenceIdAssign").value;
+  const studentEmail = globalEmail2;
+  const SelectedGender = document.getElementById('SelectedGender').value;
+
+  if (!selectedResidence || !studentEmail || !SelectedGender) { 
+    alert('Please select a residence, fill in the student email, and select a gender');
+    return;
+  }
+console.log("residence is "+ selectedResidence);
+  fetch('/admin/assign-residence', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ studentEmail, selectedResidence, SelectedGender })
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to assign residence');
+    }
+    return response.json();
+  })
+  .then(data => alert(data.message))
+  .catch(error => console.error('Error assigning residence:', error));
+}
+
+
+function updateProgress() {
+
+  const applicationReceived = document.getElementById('applicationReceived').value;
+  const evaluationProgress = document.getElementById('evaluationProgress').value;
+  const placingProcess = document.getElementById('placingProcess').value;
+  const acceptedRejected = document.getElementById('acceptedRejected').value;
+  const StdEmail = globalEmail2;
+
+  if (applicationReceived < 0 || applicationReceived > 100 || evaluationProgress < 0 || evaluationProgress > 100 || placingProcess < 0 || placingProcess > 100) {
+    alert('Please enter valid numbers between 0 and 100 for progress fields');
+    return;
+  }
+
+  fetch('/admin/update-progress', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ StdEmail, applicationReceived, evaluationProgress, placingProcess, acceptedRejected })
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to update progress');
+    }
+    return response.json();
+  })
+  .then(data => alert(data.message))
+  .catch(error => console.error('Error updating progress:', error));
+}
+        function addResidence() {
+            const resName = document.getElementById('resName').value;
+            const resLocation = document.getElementById('resLocation').value;
+            const resCost = document.getElementById('resCost').value;
+            const resCapacity = document.getElementById('resCapacity').value;
+            const sharing = document.getElementById('sharing').value === 'true';
+            const faculty = document.getElementById('facultyForResidence').value;
+            const residencetype = document.getElementById('ResidenceType').value;
+
+            if (!resName || !resLocation || !resCost || !resCapacity || !faculty || !residencetype ) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (isNaN(resCost) || isNaN(resCapacity)) {
+                alert('Please enter valid numbers for cost and capacity fields');
+                return;
+            }
+
+            fetch('/admin/add-residence', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ resName, resLocation, resCost, resCapacity, sharing, faculty, residencetype })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to add residence');
+                    }
+                    return response.json();
+                })
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error adding residence:', error));
+        }
+
+        function assignResidence() {
+            const faculty = document.getElementById('facultyAssign').value;
+            const gender = document.getElementById('genderAssign').value;
+            const residenceId = document.getElementById('residenceIdAssign').value;
+            
+
+            if (!faculty || !gender || !residenceId) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (isNaN(residenceId)) {
+                alert('Please enter a valid residence ID');
+                return;
+            }
+
+            fetch('/admin/assign-residence', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ faculty, gender, residenceId })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to assign residence');
+                    }
+                    return response.json();
+                })
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error assigning residence:', error));
+        }
+
+        function populateDropdowns() {
+            populateStudentDropdown();
+            fetch('/admin/residences')
+                .then(response => response.json())
+                .then(data => {
+                    const residenceDropdown = document.getElementById('residenceIdAssign');
+                    residenceDropdown.innerHTML = ''; 
+                    data.forEach(residence => {
+                        const option = document.createElement('option');
+                        option.value = residence.ResidenceID;
+                        option.textContent = `${residence.ResName} (${residence.ResLocation})`;
+                        residenceDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching residences:', error));
+            populateFacultyDropdowns();
+        }
+
+        function populateFacultyDropdowns() {
+            fetch('/admin/faculties')
+                .then(response => response.json())
+                .then(data => {
+                    const facultyDropdowns = document.querySelectorAll('#facultyAssign, #facultyForResidence');
+                    facultyDropdowns.forEach(dropdown => {
+                        dropdown.innerHTML = '';
+                        data.forEach(faculty => {
+                            const option = document.createElement('option');
+                            option.value = faculty;
+                            option.textContent = faculty;
+                            dropdown.appendChild(option);
+                        });
+                    });
+                })
+                .catch(error => console.error('Error fetching faculties:', error));
+        }
+
+        window.onload = populateDropdowns;
+    </script>
+</body>
+
+</html>

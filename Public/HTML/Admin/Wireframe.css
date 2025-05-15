@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+}
+
+.navigation {
+    margin-top: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: #ffff;
+}
+
+.navigation .logo {
+    width: 100 px;
+    height: 100px;
+    margin-left: 50px;
+}
+
+.navigation .centerLinks {
+    margin-left: 450px;
+}
+
+.navigation .centerLinks a {
+    margin: 12px;
+}
+
+.navigation .profile {
+    margin-right: 70px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.profile:hover {
+    transform: scale(1.1);
+}
+
+.footers {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.footers .subscribe {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 13px;
+}
+
+.footers .subscribe .subText {
+    font-size: 13px;
+    ;
+}
+
+.footers .footerNav {
+    margin-left: 100px;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.footers .followUs {
+    margin-right: 150px;
+    text-align: left;
+
+}
+
+.finalFooter {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 12px;
+}
+
+.finalFooter .copyright {
+    margin-left: 20px;
+}
+
+.finalFooter .policy {
+    margin-right: 90px;
+}
+
+.finalFooter .policy a {
+    margin: 10px;
+}
+
+#Email {
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="button"] {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: grey;
+}

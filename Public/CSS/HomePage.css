@@ -1,0 +1,213 @@
+body {
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f8f8f8;
+    padding: 10px 0;
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+}
+
+.navigation a {
+    text-decoration: none;
+    color: black;
+    padding: 8px 16px;
+}
+
+/* 
+.Herobanner img {
+    width: 100%;
+    height: auto;
+    
+}*/
+
+.Herobanner {
+    position: relative;
+    text-align: center;
+}
+
+.Herobanner img {
+    width: 100%;
+    height: auto;
+}
+
+.hero-btn {
+    position: absolute;
+    bottom: 20%;
+    left: 30%; 
+    transform: translate(-50%, -50%);
+    background-color: #3b6e7b;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+    
+
+.hero-btn:hover {
+    background-color: #3b6e7b;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+}
+
+.content-block {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.content-block .text, .content-block .image {
+    flex: 1 1 100%; 
+    margin: 10px;
+}
+
+.content-block:nth-child(odd) .text {
+    order: 1;
+}
+
+.content-block:nth-child(odd) .image {
+    order: 2;
+}
+
+.content-block:nth-child(even) .text {
+    order: 2;
+}
+
+.content-block:nth-child(even) .image {
+    order: 1;
+}
+
+.learn-button {
+    margin: 20px 0;
+}
+
+.learn-button input {
+    background-color: lightblue;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.learn-button input:hover {
+    background-color: #18A0FB;
+}
+
+.content-block1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.image2, .image3 {
+    margin-bottom: 10px;
+}
+
+.text2, .text3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+
+.ApplyButton input, .TrackButton input {
+    background-color: #000000; 
+    border: none;
+    border-radius: 20px; 
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ApplyButton input:hover, .TrackButton input:hover {
+    background-color: #000000; 
+}
+
+.container {
+    display: flex;
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+}
+
+h2 {
+    text-align: center;
+}
+
+.container h2 {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: left;
+}
+
+.subscribe, .footer-nav, .follow-us {
+    flex: 1 1 30%;
+    margin: 20px;
+}
+
+.subscribe h3, .footer-nav h2, .follow-us h2 {
+    margin-top: 20px;
+}
+
+footer a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    margin: 5px 0;
+}
+
+footer hr {
+    margin: 20px 0;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-bottom p, .footer-links {
+    margin: 0;
+}
+
+.footer-links a {
+    margin-left: 20px;
+}
+
+@media (min-width: 768px) {
+    .content-block .text, .content-block .image {
+        flex: 1 1 45%; 
+    }
+}
+

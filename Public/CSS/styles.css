@@ -1,0 +1,224 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+}
+
+.navigation {
+    margin-top: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: #ffff;
+}
+
+.navigation .logo {
+    width: 100 px;
+    height: 100px;
+    margin-left: 50px;
+}
+
+.navigation .centerLinks {
+    margin-left: 450px;
+}
+
+.navigation .centerLinks a {
+    margin: 12px;
+}
+
+.navigation .profile {
+    margin-right: 70px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+body{
+background: #c4c4c4;
+
+
+}
+.profile:hover {
+    transform: scale(1.1);
+}
+
+h1{
+	font-size:40px;
+	
+	
+}
+
+
+
+.menu-item{
+text-align:center;	
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-family: Arial, sans-serif; 
+    font-size: 16px; 
+    padding: 10px 0;
+    border-bottom: 1px solid lightgray; 
+}	
+
+
+legend {
+	font-size:30px;
+    font-weight: bold;
+    color: black;
+	text-align:center;
+}
+
+fieldset{
+   
+	padding:50px;
+	margin:40px auto;
+	width:800px;
+	
+	
+	
+}
+.username{
+	text-align:center;
+	align-items:right;	
+    padding:50px;
+	float: left;
+    width: 35%;	
+	
+	
+}
+.update-details{
+align-items:center;	
+padding:50px;	
+float: right;
+width: 45%;
+}
+.change-password{
+align-items:center;	
+padding:50px;	
+float: right;
+width: 50%;
+	
+}
+
+
+#user-icon {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+.image-upload-container img{
+	text-align:center;
+	border:1px solid black;
+	border-radius: 108px;
+	background-color: #f0f0f0;
+	
+}
+
+.file-label {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
+.footers {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.footers .subscribe {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 13px;
+}
+
+.footers .subscribe .subText {
+    font-size: 13px;
+    ;
+}
+
+.footers .footerNav {
+    margin-left: 100px;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.footers .followUs {
+    margin-right: 150px;
+    text-align: left;
+
+}
+
+.finalFooter {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 12px;
+}
+
+.finalFooter .copyright {
+    margin-left: 20px;
+}
+
+.finalFooter .policy {
+    margin-right: 90px;
+}
+
+.finalFooter .policy a {
+    margin: 10px;
+}
+
+#Email {
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="button"] {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: grey;
+}

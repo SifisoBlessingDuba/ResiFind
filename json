@@ -1,0 +1,328 @@
+{
+    "type": "database",
+    "name": "Resifind",
+    "objects": [
+        {
+            "type": "table",
+            "database": null,
+            "name": "Application",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Application (\n    ApplicationID INT PRIMARY KEY,\n    Faculty VARCHAR(100),\n    Course VARCHAR(100),\n    Year INT,\n    StdType VARCHAR(50),\n    Gender VARCHAR(10),\n    Race VARCHAR(50),\n    Payment VARCHAR(50),\n    StdEmail VARCHAR(100),\n    FOREIGN KEY (StdEmail) REFERENCES StudentDetails(StdEmail) ON DELETE CASCADE\n)",
+            "columns": [
+                {
+                    "name": "ApplicationID",
+                    "type": "INT",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY"
+                        }
+                    ]
+                },
+                {
+                    "name": "Faculty",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "Course",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "Year",
+                    "type": "INT"
+                },
+                {
+                    "name": "StdType",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "Gender",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "Race",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "Payment",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "StdEmail",
+                    "type": "VARCHAR"
+                }
+            ],
+            "constraints": [
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (StdEmail) REFERENCES StudentDetails(StdEmail) ON DELETE CASCADE\n"
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "KinDetails",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE KinDetails (\n    KinEmail VARCHAR(100) PRIMARY KEY,\n    KinName VARCHAR(100),\n    KinSurname VARCHAR(100),\n    KinCell VARCHAR(20)\n)",
+            "columns": [
+                {
+                    "name": "KinEmail",
+                    "type": "VARCHAR",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY"
+                        }
+                    ]
+                },
+                {
+                    "name": "KinName",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "KinSurname",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "KinCell",
+                    "type": "VARCHAR"
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "Residence",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Residence (\n    ResidenceCode INT PRIMARY KEY,\n    ResName VARCHAR(100),\n    ResLocation VARCHAR(255),\n    ResCost DECIMAL(10, 2)\n)",
+            "columns": [
+                {
+                    "name": "ResidenceCode",
+                    "type": "INT",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY"
+                        }
+                    ]
+                },
+                {
+                    "name": "ResName",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "ResLocation",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "ResCost",
+                    "type": "DECIMAL (10, 2)"
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "School",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE School (\n    SchoolCode INT PRIMARY KEY,\n    SchoolName VARCHAR(100),\n    Results BLOB,\n    SchoolAddress VARCHAR(255)\n)",
+            "columns": [
+                {
+                    "name": "SchoolCode",
+                    "type": "INT",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY"
+                        }
+                    ]
+                },
+                {
+                    "name": "SchoolName",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "Results",
+                    "type": "BLOB"
+                },
+                {
+                    "name": "SchoolAddress",
+                    "type": "VARCHAR"
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "Student_Kin",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Student_Kin (\n    StdEmail VARCHAR(100),\n    KinEmail VARCHAR(100),\n    PRIMARY KEY (StdEmail, KinEmail),\n    FOREIGN KEY (StdEmail) REFERENCES StudentDetails(StdEmail) ON DELETE CASCADE,\n    FOREIGN KEY (KinEmail) REFERENCES KinDetails(KinEmail) ON DELETE CASCADE\n)",
+            "columns": [
+                {
+                    "name": "StdEmail",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "KinEmail",
+                    "type": "VARCHAR"
+                }
+            ],
+            "constraints": [
+                {
+                    "type": "PRIMARY KEY",
+                    "definition": "PRIMARY KEY (StdEmail, KinEmail)"
+                },
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (StdEmail) REFERENCES StudentDetails(StdEmail) ON DELETE CASCADE"
+                },
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (KinEmail) REFERENCES KinDetails(KinEmail) ON DELETE CASCADE\n"
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "Student_Residence",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Student_Residence (\n    StdEmail VARCHAR(100),\n    ResidenceID INT,\n    RoomNumber VARCHAR(20),\n    PRIMARY KEY (StdEmail, ResidenceID),\n    FOREIGN KEY (StdEmail) REFERENCES StudentDetails(StdEmail) ON DELETE CASCADE,\n    FOREIGN KEY (ResidenceID) REFERENCES Residence(ResidenceID) ON DELETE CASCADE\n)",
+            "columns": [
+                {
+                    "name": "StdEmail",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "ResidenceID",
+                    "type": "INT"
+                },
+                {
+                    "name": "RoomNumber",
+                    "type": "VARCHAR"
+                }
+            ],
+            "constraints": [
+                {
+                    "type": "PRIMARY KEY",
+                    "definition": "PRIMARY KEY (StdEmail, ResidenceID)"
+                },
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (StdEmail) REFERENCES StudentDetails(StdEmail) ON DELETE CASCADE"
+                },
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (ResidenceID) REFERENCES Residence(ResidenceID) ON DELETE CASCADE\n"
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "Student_School",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE Student_School (\n    StdEmail VARCHAR(100),\n    SchoolID INT,\n    PRIMARY KEY (StdEmail, SchoolID),\n    FOREIGN KEY (StdEmail) REFERENCES StudentDetails(StdEmail) ON DELETE CASCADE,\n    FOREIGN KEY (SchoolID) REFERENCES School(SchoolID) ON DELETE CASCADE\n)",
+            "columns": [
+                {
+                    "name": "StdEmail",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "SchoolID",
+                    "type": "INT"
+                }
+            ],
+            "constraints": [
+                {
+                    "type": "PRIMARY KEY",
+                    "definition": "PRIMARY KEY (StdEmail, SchoolID)"
+                },
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (StdEmail) REFERENCES StudentDetails(StdEmail) ON DELETE CASCADE"
+                },
+                {
+                    "type": "FOREIGN KEY",
+                    "definition": "FOREIGN KEY (SchoolID) REFERENCES School(SchoolID) ON DELETE CASCADE\n"
+                }
+            ],
+            "rows": [
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "StudentDetails",
+            "withoutRowId": false,
+            "strict": false,
+            "ddl": "CREATE TABLE StudentDetails (\n    StdEmail VARCHAR(100) PRIMARY KEY,\n    StdName VARCHAR(100),\n    StdPassword VARCHAR(100),\n    Number VARCHAR(20),\n    Disability VARCHAR(50),\n    MedicalAid VARCHAR(50),\n    SubEmail VARCHAR(100),\n    Picture BLOB,\n    Race VARCHAR(50)\n)",
+            "columns": [
+                {
+                    "name": "StdEmail",
+                    "type": "VARCHAR",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY"
+                        }
+                    ]
+                },
+                {
+                    "name": "StdName",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "StdPassword",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "Number",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "Disability",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "MedicalAid",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "SubEmail",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "Picture",
+                    "type": "BLOB"
+                },
+                {
+                    "name": "Race",
+                    "type": "VARCHAR"
+                }
+            ],
+            "rows": [
+            ]
+        }
+    ]
+}
